@@ -18,10 +18,6 @@
     支持请求数据缓存
     支持NSOperationQueue协同调用
     支持底层请求核心定制
- 
-    version 1.1.0
-    规范化命名，提取私有方法
-    去除对AFN的依赖，改为根据是否引用自动依赖
  */
 
 #import <Foundation/Foundation.h>
