@@ -1,0 +1,605 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		214ACFC1206A4BD3007A41A4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 214ACFC0206A4BD3007A41A4 /* AppDelegate.m */; };
+		214ACFC4206A4BD3007A41A4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 214ACFC3206A4BD3007A41A4 /* ViewController.m */; };
+		214ACFC7206A4BD3007A41A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 214ACFC5206A4BD3007A41A4 /* Main.storyboard */; };
+		214ACFC9206A4BD3007A41A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 214ACFC8206A4BD3007A41A4 /* Assets.xcassets */; };
+		214ACFCC206A4BD3007A41A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 214ACFCA206A4BD3007A41A4 /* LaunchScreen.storyboard */; };
+		214ACFCF206A4BD3007A41A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 214ACFCE206A4BD3007A41A4 /* main.m */; };
+		214ACFD9206A4BD3007A41A4 /* DWFlashFlowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 214ACFD8206A4BD3007A41A4 /* DWFlashFlowTests.m */; };
+		214ACFE4206A4BD3007A41A4 /* DWFlashFlowUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 214ACFE3206A4BD3007A41A4 /* DWFlashFlowUITests.m */; };
+		C881D0E959B48A55B87B3CFB /* libPods-DWFlashFlow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90B71C2417195826ED0E4F24 /* libPods-DWFlashFlow.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		214ACFD5206A4BD3007A41A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 214ACFB4206A4BD3007A41A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 214ACFBB206A4BD3007A41A4;
+			remoteInfo = DWFlashFlow;
+		};
+		214ACFE0206A4BD3007A41A4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 214ACFB4206A4BD3007A41A4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 214ACFBB206A4BD3007A41A4;
+			remoteInfo = DWFlashFlow;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		006389174D71DC4D91DDDAEF /* Pods-DWFlashFlow.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DWFlashFlow.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DWFlashFlow/Pods-DWFlashFlow.debug.xcconfig"; sourceTree = "<group>"; };
+		214ACFBC206A4BD3007A41A4 /* DWFlashFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DWFlashFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		214ACFBF206A4BD3007A41A4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		214ACFC0206A4BD3007A41A4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		214ACFC2206A4BD3007A41A4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		214ACFC3206A4BD3007A41A4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		214ACFC6206A4BD3007A41A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		214ACFC8206A4BD3007A41A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		214ACFCB206A4BD3007A41A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		214ACFCD206A4BD3007A41A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		214ACFCE206A4BD3007A41A4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		214ACFD4206A4BD3007A41A4 /* DWFlashFlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DWFlashFlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		214ACFD8206A4BD3007A41A4 /* DWFlashFlowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DWFlashFlowTests.m; sourceTree = "<group>"; };
+		214ACFDA206A4BD3007A41A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		214ACFDF206A4BD3007A41A4 /* DWFlashFlowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DWFlashFlowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		214ACFE3206A4BD3007A41A4 /* DWFlashFlowUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DWFlashFlowUITests.m; sourceTree = "<group>"; };
+		214ACFE5206A4BD3007A41A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49C9A3EECC3EFA1BF3CAE01F /* Pods-DWFlashFlow.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DWFlashFlow.release.xcconfig"; path = "Pods/Target Support Files/Pods-DWFlashFlow/Pods-DWFlashFlow.release.xcconfig"; sourceTree = "<group>"; };
+		90B71C2417195826ED0E4F24 /* libPods-DWFlashFlow.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DWFlashFlow.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		214ACFB9206A4BD3007A41A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C881D0E959B48A55B87B3CFB /* libPods-DWFlashFlow.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		214ACFD1206A4BD3007A41A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		214ACFDC206A4BD3007A41A4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03615F6E727D8C47D6C4B068 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				006389174D71DC4D91DDDAEF /* Pods-DWFlashFlow.debug.xcconfig */,
+				49C9A3EECC3EFA1BF3CAE01F /* Pods-DWFlashFlow.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		214ACFB3206A4BD3007A41A4 = {
+			isa = PBXGroup;
+			children = (
+				214ACFBE206A4BD3007A41A4 /* DWFlashFlow */,
+				214ACFD7206A4BD3007A41A4 /* DWFlashFlowTests */,
+				214ACFE2206A4BD3007A41A4 /* DWFlashFlowUITests */,
+				214ACFBD206A4BD3007A41A4 /* Products */,
+				03615F6E727D8C47D6C4B068 /* Pods */,
+				BB3D5B918C053C83882477DE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		214ACFBD206A4BD3007A41A4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				214ACFBC206A4BD3007A41A4 /* DWFlashFlow.app */,
+				214ACFD4206A4BD3007A41A4 /* DWFlashFlowTests.xctest */,
+				214ACFDF206A4BD3007A41A4 /* DWFlashFlowUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		214ACFBE206A4BD3007A41A4 /* DWFlashFlow */ = {
+			isa = PBXGroup;
+			children = (
+				214ACFBF206A4BD3007A41A4 /* AppDelegate.h */,
+				214ACFC0206A4BD3007A41A4 /* AppDelegate.m */,
+				214ACFC2206A4BD3007A41A4 /* ViewController.h */,
+				214ACFC3206A4BD3007A41A4 /* ViewController.m */,
+				214ACFC5206A4BD3007A41A4 /* Main.storyboard */,
+				214ACFC8206A4BD3007A41A4 /* Assets.xcassets */,
+				214ACFCA206A4BD3007A41A4 /* LaunchScreen.storyboard */,
+				214ACFCD206A4BD3007A41A4 /* Info.plist */,
+				214ACFCE206A4BD3007A41A4 /* main.m */,
+			);
+			path = DWFlashFlow;
+			sourceTree = "<group>";
+		};
+		214ACFD7206A4BD3007A41A4 /* DWFlashFlowTests */ = {
+			isa = PBXGroup;
+			children = (
+				214ACFD8206A4BD3007A41A4 /* DWFlashFlowTests.m */,
+				214ACFDA206A4BD3007A41A4 /* Info.plist */,
+			);
+			path = DWFlashFlowTests;
+			sourceTree = "<group>";
+		};
+		214ACFE2206A4BD3007A41A4 /* DWFlashFlowUITests */ = {
+			isa = PBXGroup;
+			children = (
+				214ACFE3206A4BD3007A41A4 /* DWFlashFlowUITests.m */,
+				214ACFE5206A4BD3007A41A4 /* Info.plist */,
+			);
+			path = DWFlashFlowUITests;
+			sourceTree = "<group>";
+		};
+		BB3D5B918C053C83882477DE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90B71C2417195826ED0E4F24 /* libPods-DWFlashFlow.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		214ACFBB206A4BD3007A41A4 /* DWFlashFlow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 214ACFE8206A4BD3007A41A4 /* Build configuration list for PBXNativeTarget "DWFlashFlow" */;
+			buildPhases = (
+				48869EBEE4643BA0AE9D8189 /* [CP] Check Pods Manifest.lock */,
+				214ACFB8206A4BD3007A41A4 /* Sources */,
+				214ACFB9206A4BD3007A41A4 /* Frameworks */,
+				214ACFBA206A4BD3007A41A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DWFlashFlow;
+			productName = DWFlashFlow;
+			productReference = 214ACFBC206A4BD3007A41A4 /* DWFlashFlow.app */;
+			productType = "com.apple.product-type.application";
+		};
+		214ACFD3206A4BD3007A41A4 /* DWFlashFlowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 214ACFEB206A4BD3007A41A4 /* Build configuration list for PBXNativeTarget "DWFlashFlowTests" */;
+			buildPhases = (
+				214ACFD0206A4BD3007A41A4 /* Sources */,
+				214ACFD1206A4BD3007A41A4 /* Frameworks */,
+				214ACFD2206A4BD3007A41A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				214ACFD6206A4BD3007A41A4 /* PBXTargetDependency */,
+			);
+			name = DWFlashFlowTests;
+			productName = DWFlashFlowTests;
+			productReference = 214ACFD4206A4BD3007A41A4 /* DWFlashFlowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		214ACFDE206A4BD3007A41A4 /* DWFlashFlowUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 214ACFEE206A4BD3007A41A4 /* Build configuration list for PBXNativeTarget "DWFlashFlowUITests" */;
+			buildPhases = (
+				214ACFDB206A4BD3007A41A4 /* Sources */,
+				214ACFDC206A4BD3007A41A4 /* Frameworks */,
+				214ACFDD206A4BD3007A41A4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				214ACFE1206A4BD3007A41A4 /* PBXTargetDependency */,
+			);
+			name = DWFlashFlowUITests;
+			productName = DWFlashFlowUITests;
+			productReference = 214ACFDF206A4BD3007A41A4 /* DWFlashFlowUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		214ACFB4206A4BD3007A41A4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = Wicky;
+				TargetAttributes = {
+					214ACFBB206A4BD3007A41A4 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+					214ACFD3206A4BD3007A41A4 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 214ACFBB206A4BD3007A41A4;
+					};
+					214ACFDE206A4BD3007A41A4 = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 214ACFBB206A4BD3007A41A4;
+					};
+				};
+			};
+			buildConfigurationList = 214ACFB7206A4BD3007A41A4 /* Build configuration list for PBXProject "DWFlashFlow" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 214ACFB3206A4BD3007A41A4;
+			productRefGroup = 214ACFBD206A4BD3007A41A4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				214ACFBB206A4BD3007A41A4 /* DWFlashFlow */,
+				214ACFD3206A4BD3007A41A4 /* DWFlashFlowTests */,
+				214ACFDE206A4BD3007A41A4 /* DWFlashFlowUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		214ACFBA206A4BD3007A41A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				214ACFCC206A4BD3007A41A4 /* LaunchScreen.storyboard in Resources */,
+				214ACFC9206A4BD3007A41A4 /* Assets.xcassets in Resources */,
+				214ACFC7206A4BD3007A41A4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		214ACFD2206A4BD3007A41A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		214ACFDD206A4BD3007A41A4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		48869EBEE4643BA0AE9D8189 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DWFlashFlow-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		214ACFB8206A4BD3007A41A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				214ACFC4206A4BD3007A41A4 /* ViewController.m in Sources */,
+				214ACFCF206A4BD3007A41A4 /* main.m in Sources */,
+				214ACFC1206A4BD3007A41A4 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		214ACFD0206A4BD3007A41A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				214ACFD9206A4BD3007A41A4 /* DWFlashFlowTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		214ACFDB206A4BD3007A41A4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				214ACFE4206A4BD3007A41A4 /* DWFlashFlowUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		214ACFD6206A4BD3007A41A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 214ACFBB206A4BD3007A41A4 /* DWFlashFlow */;
+			targetProxy = 214ACFD5206A4BD3007A41A4 /* PBXContainerItemProxy */;
+		};
+		214ACFE1206A4BD3007A41A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 214ACFBB206A4BD3007A41A4 /* DWFlashFlow */;
+			targetProxy = 214ACFE0206A4BD3007A41A4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		214ACFC5206A4BD3007A41A4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				214ACFC6206A4BD3007A41A4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		214ACFCA206A4BD3007A41A4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				214ACFCB206A4BD3007A41A4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		214ACFE6206A4BD3007A41A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		214ACFE7206A4BD3007A41A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		214ACFE9206A4BD3007A41A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 006389174D71DC4D91DDDAEF /* Pods-DWFlashFlow.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z26Y87B8NH;
+				INFOPLIST_FILE = DWFlashFlow/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wicky.DWFlashFlow;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		214ACFEA206A4BD3007A41A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49C9A3EECC3EFA1BF3CAE01F /* Pods-DWFlashFlow.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z26Y87B8NH;
+				INFOPLIST_FILE = DWFlashFlow/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wicky.DWFlashFlow;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		214ACFEC206A4BD3007A41A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z26Y87B8NH;
+				INFOPLIST_FILE = DWFlashFlowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wicky.DWFlashFlowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DWFlashFlow.app/DWFlashFlow";
+			};
+			name = Debug;
+		};
+		214ACFED206A4BD3007A41A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z26Y87B8NH;
+				INFOPLIST_FILE = DWFlashFlowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wicky.DWFlashFlowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DWFlashFlow.app/DWFlashFlow";
+			};
+			name = Release;
+		};
+		214ACFEF206A4BD3007A41A4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z26Y87B8NH;
+				INFOPLIST_FILE = DWFlashFlowUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wicky.DWFlashFlowUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DWFlashFlow;
+			};
+			name = Debug;
+		};
+		214ACFF0206A4BD3007A41A4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z26Y87B8NH;
+				INFOPLIST_FILE = DWFlashFlowUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wicky.DWFlashFlowUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DWFlashFlow;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		214ACFB7206A4BD3007A41A4 /* Build configuration list for PBXProject "DWFlashFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				214ACFE6206A4BD3007A41A4 /* Debug */,
+				214ACFE7206A4BD3007A41A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		214ACFE8206A4BD3007A41A4 /* Build configuration list for PBXNativeTarget "DWFlashFlow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				214ACFE9206A4BD3007A41A4 /* Debug */,
+				214ACFEA206A4BD3007A41A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		214ACFEB206A4BD3007A41A4 /* Build configuration list for PBXNativeTarget "DWFlashFlowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				214ACFEC206A4BD3007A41A4 /* Debug */,
+				214ACFED206A4BD3007A41A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		214ACFEE206A4BD3007A41A4 /* Build configuration list for PBXNativeTarget "DWFlashFlowUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				214ACFEF206A4BD3007A41A4 /* Debug */,
+				214ACFF0206A4BD3007A41A4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 214ACFB4206A4BD3007A41A4 /* Project object */;
+}

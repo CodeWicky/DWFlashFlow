@@ -1,0 +1,41 @@
+PODS:
+  - AFNetworking (3.0.4):
+    - AFNetworking/NSURLSession (= 3.0.4)
+    - AFNetworking/Reachability (= 3.0.4)
+    - AFNetworking/Security (= 3.0.4)
+    - AFNetworking/Serialization (= 3.0.4)
+    - AFNetworking/UIKit (= 3.0.4)
+  - AFNetworking/NSURLSession (3.0.4):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.0.4)
+  - AFNetworking/Security (3.0.4)
+  - AFNetworking/Serialization (3.0.4)
+  - AFNetworking/UIKit (3.0.4):
+    - AFNetworking/NSURLSession
+  - DWFlashFlow (1.0.2.5)
+  - DWNetworkAFNManager (1.0.1):
+    - AFNetworking (~> 3.0.0)
+
+DEPENDENCIES:
+  - DWFlashFlow (from `../`)
+  - DWNetworkAFNManager (~> 1.0.0)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - AFNetworking
+    - DWNetworkAFNManager
+
+EXTERNAL SOURCES:
+  DWFlashFlow:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  DWFlashFlow: b2a63328a20c8fca054f3a4d9c414b534561fcd1
+  DWNetworkAFNManager: 96688814e49822ac2f80824c11cdbce9e85c440d
+
+PODFILE CHECKSUM: df882cd0acd73b2c350ebf544243e3aac4900e4e
+
+COCOAPODS: 1.9.1

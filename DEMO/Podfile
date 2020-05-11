@@ -1,0 +1,6 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'DWFlashFlow' do
+pod 'DWNetworkAFNManager', '~> 1.0.0'
+pod 'DWFlashFlow', :path => '../'
+end
