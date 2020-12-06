@@ -21,6 +21,8 @@
  添加缓存机制
  添加identifier，可以由开发者自行设置。方便在批量请求和链请求中区分数据来源
  
+ version 2.0.0
+ 请求响应数据二次处理改为拦截器模式
  */
 
 #ifndef DWFlashFlow_h
