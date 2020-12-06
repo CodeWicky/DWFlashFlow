@@ -1,0 +1,4 @@
+target 'DEMO' do
+pod 'DWFlashFlow', :path=>'../'
+pod 'DWNetworkAFNManager', '~> 1.0.0'
+end
