@@ -92,28 +92,28 @@
 
 -(void)batchRequest {
     DWFlashFlowRequest * r1 = [DWFlashFlowRequest new];
-    r1.customID = @"testRequest";
+    r1.identifier = @"testRequest";
     r1.cachePolicy = DWFlashFlowCachePolicyLocalOnly;
     r1.fullURL = @"https://www.easy-mock.com/mock/5ab8d2273838ca14983dc100/zdwApi/test";
     r1.requestCompletion = ^(BOOL success, id response, NSError *error, DWFlashFlowAbstractRequest *request) {
         NSLog(@"r1 finish");
     };
     
-    r1.interceptorAfterResponse = ^DWFlashFlowInterceptorWrapper *(DWFlashFlowInterceptorWrapper *interceptor) {
-        interceptor.success = YES;
-        return interceptor;
+    r1.interceptorAfterResponse = ^DWFlashFlowResponseInterceptorWrapper *(DWFlashFlowResponseInterceptorWrapper *responseWrapper) {
+        responseWrapper.success = YES;
+        return responseWrapper;
     };
     
     [DWFlashFlowManager manager].baseURL = @"http://pj253633a.bkt.clouddn.com";
     DWFlashFlowRequest * r2 = [DWFlashFlowRequest new];
-    r2.customID = @"testDownload";
+    r2.identifier = @"testDownload";
     r2.apiURL = @"Silver%20Scrapes.mp3";
     r2.requestProgress = ^(NSProgress *progress) {
         NSLog(@"%@",progress);
     };
-    r2.interceptorAfterResponse = ^DWFlashFlowInterceptorWrapper *(DWFlashFlowInterceptorWrapper *interceptor) {
-        interceptor.success = YES;
-        return interceptor;
+    r2.interceptorAfterResponse = ^DWFlashFlowResponseInterceptorWrapper *(DWFlashFlowResponseInterceptorWrapper *responseWrapper) {
+        responseWrapper.success = YES;
+        return responseWrapper;
     };
     r2.requestCompletion = ^(BOOL success, id response, NSError *error, DWFlashFlowAbstractRequest *request) {
         NSLog(@"r2 finish");
