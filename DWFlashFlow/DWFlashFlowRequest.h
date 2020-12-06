@@ -61,14 +61,15 @@ typedef NS_ENUM(NSUInteger, DWFlashFlowCachePolicy) {///缓存策略
 typedef NSURL * (^DWFlashFlowDestinationCallback)(NSURL *targetPath, NSURLResponse *response);
 
 ///进度回调
-typedef void (^DWFlashFlowProgressCallback)(NSProgress * progress);
+typedef void (^DWFlahsFlowProgressCallback)(NSProgress * progress);
 
 ///处理回调
 typedef id(^DWFlashFlowProcessorBlock)(DWFlashFlowRequest * request,id data);
 
-///请求结果拦截器
-@class DWFlashFlowInterceptorWrapper;
-typedef DWFlashFlowInterceptorWrapper *(^DWFlashFlowInterceptor)(DWFlashFlowInterceptorWrapper * interceptorWrapper);
+@class DWFlashFlowResponseInterceptorWrapper;
+///响应拦截器
+typedef DWFlashFlowResponseInterceptorWrapper *(^DWFlashFlowResponseInterceptor)(DWFlashFlowResponseInterceptorWrapper * responseWrapper);
+
 
 @class DWFlashFlowRequestConfig;
 @interface DWFlashFlowRequest : DWFlashFlowAbstractRequest<NSCopying>
@@ -147,12 +148,12 @@ typedef DWFlashFlowInterceptorWrapper *(^DWFlashFlowInterceptor)(DWFlashFlowInte
 @property (nonatomic ,copy) DWFlashFlowProcessorBlock preprocessorBeforeRequest;
 @property (nonatomic ,assign) BOOL useGlobalPreprocessor;
 
-//The action after recieve response.If interceptorAfterResponse is nil,but useGlobalInterceptor is true and globalInterceptor not nil will use globalInterceptor instead.And useGlobalInterceptor is true by default.
-///收到响应后立即触发的回调，对响应做拦截器处理。如果未设置interceptorAfterResponse，但是useGlobalInterceptor为真且设置过全局拦截器globalInterceptor将会使用全局拦截器。useGlobalInterceptor默认为真。
+//The action after recieve response.If interceptorAfterResponse is nil,but useGlobalInterceptor is true and globalReprocessing not nil will use globalReprocessing instead.And useGlobalInterceptor is true by default.
+///收到响应后立即触发的回调，对响应做拦截。如果未设置interceptorAfterResponse，但是useGlobalInterceptor为真且设置过全局拦截器globalReprocessing将会使用全局拦截器。useGlobalInterceptor默认为真。
 ///注：1.系统对响应数据的实际拦截器由 Linker 中 -interceptorFromRequest: 方法决定。
 ///   2.原则上开发者重写Linker中 -interceptorFromRequest: 方法时应保证若interceptorAfterResponse与全局回调同时存在，先调用全局回调，再调用interceptorAfterResponse。
 ///   3.拦截器回调发生在响应之后，请求 成功/失败 回调发生之前。
-@property (nonatomic ,copy) DWFlashFlowInterceptor interceptorAfterResponse;
+@property (nonatomic ,copy) DWFlashFlowResponseInterceptor interceptorAfterResponse;
 @property (nonatomic ,assign) BOOL useGlobalInterceptor;
 
 //The NSURLSessionTask who send the request.It only set by framework.
@@ -161,11 +162,7 @@ typedef DWFlashFlowInterceptorWrapper *(^DWFlashFlowInterceptor)(DWFlashFlowInte
 
 //Callbacks for request which indicate progress.Use together with -start.If you use The method -startWithCompletion: or -startWithProgress:completion: will ignore requestProgress and requestCompletion and use the parameters you pass.
 ///展示进度或完成的回调。他们应该配合 -start 方法使用。如果使用 -startWithCompletion: 或 -startWithProgress:completion:这两个方法，那么这两个属性将被忽略，转而使用你所传入的参数。
-@property (nonatomic ,copy) DWFlashFlowProgressCallback requestProgress;
-
-//Indicates the error for request after completion.
-///请求完成后的错误。
-@property (nonatomic ,strong ,readonly) NSError * error;
+@property (nonatomic ,copy) DWFlahsFlowProgressCallback requestProgress;
 
 //Indicate the savePath for each download request.If destination is available will use it,otherwise use downloadSavePath.
 ///指定下载路径。如果destination可用则使用回调，否则下载地址将有downloadSavePath指定。
@@ -202,9 +199,9 @@ typedef DWFlashFlowInterceptorWrapper *(^DWFlashFlowInterceptor)(DWFlashFlowInte
  
  @disc 1.-startWithCompletion: 时默认无进度回调
  
-       2.调用 -start 方法时会使用request对象的requestProgress和requestCompletion作为回调。另外两个 -start... 系方法均已实际传入参数为准。
+       2.调用 -start 方法时会使用request对象的requestProgress和requestCompletion作为回调。另外两个 -start... 系方法会将非空的参数赋值给request对象，并作为回调。
  */
--(void)startWithProgress:(DWFlashFlowProgressCallback)progress completion:(DWFlashFlowRequestCompletion)completion;
+-(void)startWithProgress:(DWFlahsFlowProgressCallback)progress completion:(DWFlashFlowRequestCompletion)completion;
 -(void)startWithCompletion:(DWFlashFlowRequestCompletion)completion;
 -(void)start;
 
@@ -286,11 +283,12 @@ typedef DWFlashFlowInterceptorWrapper *(^DWFlashFlowInterceptor)(DWFlashFlowInte
 
 //Actual request interceptor
 ///实际请求的拦截器回调
-@property (nonatomic ,copy) DWFlashFlowInterceptor actualInterceptor;
+@property (nonatomic ,copy) DWFlashFlowResponseInterceptor actualInterceptor;
 
 @end
 
-@interface DWFlashFlowInterceptorWrapper : NSObject
+///响应数据拦截器包装者
+@interface DWFlashFlowResponseInterceptorWrapper : NSObject
 
 @property (nonatomic ,assign) BOOL success;
 

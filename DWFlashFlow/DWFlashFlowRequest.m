@@ -8,6 +8,7 @@
 
 #import "DWFlashFlowRequest.h"
 #import "DWFlashFlowManager.h"
+#import "DWFlashFlowAbstractRequest+Private.h"
 
 @implementation DWFlashFlowRequest
 
@@ -18,19 +19,26 @@
 +(instancetype)requestWithResumeData:(NSData *)resumeData {
     DWFlashFlowRequest * r = [DWFlashFlowRequest new];
     r.requestType = DWFlashFlowRequestTypeDownload;
-    configRequestWithStatus(r, DWFlashFlowRequestCanceled);
-    configRequestWithResumeData(r, resumeData);
+    [r configRequestWithStatus:DWFlashFlowRequestCanceled];
+    [r configRequestWithResumeData:resumeData];
     return r;
 }
 
 -(void)startWithCompletion:(DWFlashFlowRequestCompletion)completion {
+    if (completion) {
+        self.requestCompletion = completion;
+    }
     [super start];
-    [DWFlashFlowManager sendRequest:self completion:completion];
 }
 
--(void)startWithProgress:(DWFlashFlowProgressCallback)progress completion:(DWFlashFlowRequestCompletion)completion {
+-(void)startWithProgress:(DWFlahsFlowProgressCallback)progress completion:(DWFlashFlowRequestCompletion)completion {
+    if (progress) {
+        self.requestProgress = progress;
+    }
+    if (completion) {
+        self.requestCompletion = completion;
+    }
     [super start];
-    [DWFlashFlowManager sendRequest:self progress:progress completion:completion];
 }
 
 -(void)cancelByProducingResumeData:(void (^)(NSData *))completionHandler {
@@ -44,6 +52,19 @@
 
 -(void)suspend {
     [DWFlashFlowManager suspendRequest:self];
+}
+
+#pragma mark --- private ---
+-(void)configRequestWithResumeData:(NSData *)resumeData {
+    _resumeData = resumeData;
+}
+
+-(void)configRequestWithTask:(NSURLSessionDataTask *)task {
+    _task = task;
+}
+
+-(void)configRequestWithConfiguration:(DWFlashFlowRequestConfig *)configuration {
+    _configuration = configuration;
 }
 
 #pragma mark --- override ---
@@ -69,8 +90,8 @@
 
 -(id)copyWithZone:(NSZone *)zone {
     DWFlashFlowRequest * r = [[[self class] allocWithZone:zone] init];
-    configRequestWithStatus(r, self.status);
-    r.customID = self.customID;
+    [r configRequestWithStatus:self.status];
+    r.identifier = self.identifier;
     r.finishAfterComplete = self.finishAfterComplete;
     r.requestCompletion = [self.requestCompletion copy];
     r.apiURL = self.apiURL;
@@ -94,10 +115,10 @@
     r.interceptorAfterResponse = [self.interceptorAfterResponse copy];
     r.useGlobalInterceptor = self.useGlobalInterceptor;
     r.requestProgress = [self.requestProgress copy];
-    configRequestWithError(r, [self.error copy]);
+    [r configRequestWithError:[self.error copy]];
     r.destination = [self.destination copy];
     r.downloadSavePath = self.downloadSavePath;
-    configRequestWithResumeData(r, [self.resumeData copy]);
+    [r configRequestWithResumeData:[self.resumeData copy]];
     r.files = [self.files copy];
     r.cachePolicy = self.cachePolicy;
     r.expiredInterval = self.expiredInterval;
@@ -130,27 +151,13 @@
     [DWFlashFlowManager cancelRequest:self];
 }
 
-#pragma mark --- tool func ---
-static inline void configRequestWithStatus(DWFlashFlowRequest * r,DWFlashFlowRequestStatus status) {
-    [r willChangeValueForKey:@"status"];
-    [r setValue:@(status) forKey:@"_status"];
-    [r didChangeValueForKey:@"status"];
-}
-
-static inline void configRequestWithResumeData(DWFlashFlowRequest * r,NSData * resumeData) {
-    [r setValue:resumeData forKey:@"_resumeData"];
-}
-
-static inline void configRequestWithError(DWFlashFlowRequest * r,NSError * error) {
-    [r setValue:error forKey:@"_error"];
-}
 @end
 
 @implementation DWFlashFlowRequestConfig
 
 @end
 
-@implementation DWFlashFlowInterceptorWrapper
+@implementation DWFlashFlowResponseInterceptorWrapper
 
 @end
 

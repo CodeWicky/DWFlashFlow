@@ -13,15 +13,6 @@
  */
 #import <Foundation/Foundation.h>
 
-@protocol DWFlashFlowRequestOperationProtocol
-
-@required
--(void)start;
--(void)cancel;
-@end
-
-@class DWFlashFlowAbstractRequest;
-
 typedef NS_ENUM(NSUInteger, DWFlashFlowRequestStatus) {///请求所处状态
     DWFlashFlowRequestReady,
     DWFlashFlowRequestExcuting,
@@ -30,18 +21,19 @@ typedef NS_ENUM(NSUInteger, DWFlashFlowRequestStatus) {///请求所处状态
     DWFlashFlowRequestFinish
 };
 
+@class DWFlashFlowAbstractRequest;
 ///完成回调
 typedef void(^DWFlashFlowRequestCompletion)(BOOL success,id response,NSError * error,DWFlashFlowAbstractRequest * request);
 
-@interface DWFlashFlowAbstractRequest : NSOperation<DWFlashFlowRequestOperationProtocol>
+@interface DWFlashFlowAbstractRequest : NSOperation
 
 ///The unique ID for each request.
 ///每个请求对象的唯一标识。
 @property (nonatomic ,copy ,readonly) NSString * requestID;
 
-//The custom ID for each request which is set by developer.It will use customID as key first in batchRequest and chainRequest.
-///由开发者设置的标识。批量请求和链请求中会优先使用customID作为合并key。
-@property (nonatomic ,copy) NSString * customID;
+//The identifier for each request which is set by developer.It will use identifier as key first in batchRequest and chainRequest.
+///由开发者设置的标识。批量请求和链请求中会优先使用identifier作为合并key。
+@property (nonatomic ,copy) NSString * identifier;
 
 //The current status for request.KVO is supported.
 ///请求的当前状态。支持KVO。
@@ -59,14 +51,9 @@ typedef void(^DWFlashFlowRequestCompletion)(BOOL success,id response,NSError * e
 ///请求的响应，只读，由框架进行赋值。
 @property (nonatomic ,strong ,readonly) id response;
 
-/**
- Indicates this operation has been finished.
- 
- 标志着任务结束。
- 
- @disc 框架内部调用，开发者无需手动调用
- */
--(void)finishOperation;
+//The error for request.It only set by framework.
+///请求的错误信息，只读，由框架进行赋值
+@property (nonatomic ,strong ,readonly) NSError * error;
 
 /**
  *  任务开始或取消

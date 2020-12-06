@@ -39,7 +39,7 @@
  
  @param completion 完成回调
  
- @disc 调用 -start 方法时会使用request对象的requestProgress和requestCompletion作为回调。-startWithCompletion: 系方法以实际传入参数为准。
+ @disc 调用 -start 方法时会使用request对象的requestProgress和requestCompletion作为回调。-startWithCompletion: 系方法会将非空的参数赋值给request对象，并作为回调。
  */
 -(void)startWithCompletion:(DWFlashFlowRequestCompletion)completion;
 -(void)start;

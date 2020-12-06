@@ -8,6 +8,8 @@
 
 #import "DWFlashFlowBaseLinker.h"
 #import "DWFlashFlowManager.h"
+#import "DWFlashFlowAbstractRequest+Private.h"
+#import "DWFlashFlowRequest+Private.h"
 
 @implementation DWFlashFlowBaseLinker
 
@@ -99,10 +101,10 @@
     if (!r.useGlobalPreprocessor) {
         return r.preprocessorBeforeRequest;
     }
-    return preprocessorFromTwo(r.preprocessorBeforeRequest,globalManager().globalPreprocessor);
+    return processorFromTwo(r.preprocessorBeforeRequest,globalManager().globalPreprocessor);
 }
 
--(DWFlashFlowInterceptor)interceptorFromRequest:(DWFlashFlowRequest *)r {
+-(DWFlashFlowResponseInterceptor)interceptorFromRequest:(DWFlashFlowRequest *)r {
     if (!r) {
         return nil;
     }
@@ -112,13 +114,25 @@
     return interceptorFromTwo(globalManager().globalInterceptor, r.interceptorAfterResponse);
 }
 
+-(void)configRequest:(DWFlashFlowRequest *)r withStatus:(DWFlashFlowRequestStatus)status {
+    [r configRequestWithStatus:status];
+}
+
+-(void)configRequest:(DWFlashFlowRequest *)r withResumeData:(NSData *)resumeData {
+    [r configRequestWithResumeData:resumeData];
+}
+
+-(void)configRequest:(DWFlashFlowRequest *)r withTask:(NSURLSessionTask *)task {
+    [r configRequestWithTask:task];
+}
+
 #pragma mark --- protocol method---
 
--(void)sendRequest:(DWFlashFlowRequest *)request progress:(DWFlashFlowProgressCallback)progress completion:(DWFlashFlowCompletion)completion {
+-(void)sendRequest:(DWFlashFlowRequest *)request progress:(DWFlahsFlowProgressCallback)progress completion:(DWFlashFlowLinkerCompletion)completion {
     NSAssert(NO, @"Implement this method in subclass of DWFlashFlowBaseLinker and don't call super method.");
 }
 
--(void)sendResumeDataRequest:(DWFlashFlowRequest *)request progress:(DWFlashFlowProgressCallback)progress completion:(DWFlashFlowCompletion)completion {
+-(void)sendResumeDataRequest:(DWFlashFlowRequest *)request progress:(DWFlahsFlowProgressCallback)progress completion:(DWFlashFlowLinkerCompletion)completion {
     NSAssert(NO, @"Implement this method in subclass of DWFlashFlowBaseLinker and don't call super method.");
 }
 
@@ -164,7 +178,7 @@ static inline NSDictionary * dicFromOriAndAdd(NSDictionary * ori,NSDictionary * 
     return [dic copy];
 }
 
-static DWFlashFlowProcessorBlock preprocessorFromTwo(DWFlashFlowProcessorBlock a,DWFlashFlowProcessorBlock b) {
+static DWFlashFlowProcessorBlock processorFromTwo(DWFlashFlowProcessorBlock a,DWFlashFlowProcessorBlock b) {
     int c = 0;
     if (a) {
         c++;
@@ -188,7 +202,7 @@ static DWFlashFlowProcessorBlock preprocessorFromTwo(DWFlashFlowProcessorBlock a
     }
 }
 
-static DWFlashFlowInterceptor interceptorFromTwo(DWFlashFlowInterceptor a,DWFlashFlowInterceptor b) {
+static DWFlashFlowResponseInterceptor interceptorFromTwo(DWFlashFlowResponseInterceptor a,DWFlashFlowResponseInterceptor b) {
     int c = 0;
     if (a) {
         c++;
@@ -203,7 +217,7 @@ static DWFlashFlowInterceptor interceptorFromTwo(DWFlashFlowInterceptor a,DWFlas
     } else if (c == 2) {
         return b;
     } else {
-        DWFlashFlowInterceptor ab = ^(DWFlashFlowInterceptorWrapper * wrapper) {
+        DWFlashFlowResponseInterceptor ab = ^(DWFlashFlowResponseInterceptorWrapper * wrapper) {
             wrapper = a(wrapper);
             wrapper = b(wrapper);
             return wrapper;

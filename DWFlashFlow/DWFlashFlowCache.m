@@ -217,27 +217,11 @@ NS_INLINE NSURLRequest * requestForKey(NSString * key) {
 @implementation DWFlashFlowAdvancedCache
 
 +(instancetype)cacheHandlerWithMaxExpireInterval:(NSTimeInterval)expireInterval maxMemorySize:(NSUInteger)memorySize maxDiskSize:(NSUInteger)diskSize {
-    __kindof DWFlashFlowAdvancedCache * handler = [self dw_new];
-    if (handler) {
-        handler.ioQueue = dispatch_queue_create("com.handleLocalCacheQueue", DISPATCH_QUEUE_SERIAL);
-        handler.maxExpireInterval = expireInterval;
-        handler.maxMemorySize = memorySize;
-        handler.maxDiskSize = diskSize;
-        [[NSNotificationCenter defaultCenter] addObserver:handler
-                                                 selector:@selector(cleanLoalDiskCacheWithCompletion:)
-                                                     name:UIApplicationWillTerminateNotification
-                                                   object:nil];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:handler
-                                                 selector:@selector(backgroundCleanDisk)
-                                                     name:UIApplicationDidEnterBackgroundNotification
-                                                   object:nil];
-    }
-    return handler;
+    return [[self alloc] initWithMaxExpireInterval:expireInterval maxMemorySize:memorySize maxDiskSize:diskSize];
 }
 
 +(instancetype)cacheHandler {
-    return [self cacheHandlerWithMaxExpireInterval:(60 * 60 * 24 * 7) maxMemorySize:(1024 * 1024 * 2) maxDiskSize:(1024 * 1024 * 100)];
+    return [[self alloc] initWithMaxExpireInterval:(60 * 60 * 24 * 7) maxMemorySize:(1024 * 1024 * 2) maxDiskSize:(1024 * 1024 * 100)];
 }
 
 -(void)storeCachedResponse:(id)cachedResponse forKey:(NSString *)key request:(DWFlashFlowRequest *)request {
@@ -253,13 +237,12 @@ NS_INLINE NSURLRequest * requestForKey(NSString * key) {
         expiredInterval = [DWFlashFlowManager manager].globalExpiredInterval;
     }
     
-    DWFlashFlowAdvancedCache * cache = [DWFlashFlowAdvancedCache dw_new];
+    DWFlashFlowAdvancedCache * cache = [[DWFlashFlowAdvancedCache alloc] initWithMaxExpireInterval:expiredInterval maxMemorySize:0 maxDiskSize:0];
     cache.cachedResponse = cachedResponse;
     cache.md5Key = md5Key;
     cache.cacheType = cacheType(cachedResponse);
     cache.appVersion = [DWFlashFlowManager manager].appVersion;
     cache.createTime = [NSDate date];
-    cache.expiredInterval = expiredInterval;
     [self.memoryCache setObject:cache forKey:md5Key];
     dispatch_async(self.ioQueue, ^{
         [NSKeyedArchiver archiveRootObject:cache toFile:metaPathWithKey(md5Key)];
@@ -324,6 +307,18 @@ NS_INLINE NSURLRequest * requestForKey(NSString * key) {
 }
 
 #pragma mark --- tool method ---
+-(instancetype)initWithMaxExpireInterval:(NSTimeInterval)expireInterval maxMemorySize:(NSUInteger)memorySize maxDiskSize:(NSUInteger)diskSize {
+    if (self = [super init]) {
+        _maxExpireInterval = expireInterval;
+        _maxMemorySize = memorySize;
+        _maxDiskSize = diskSize;
+        _ioQueue = dispatch_queue_create("com.handleLocalCacheQueue", DISPATCH_QUEUE_SERIAL);
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cleanLoalDiskCacheWithCompletion:) name:UIApplicationWillTerminateNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(backgroundCleanDisk) name:UIApplicationDidEnterBackgroundNotification object:nil];
+    }
+    return self;
+}
+
 - (void)backgroundCleanDisk {
     Class UIApplicationClass = NSClassFromString(@"UIApplication");
     if(!UIApplicationClass || ![UIApplicationClass respondsToSelector:@selector(sharedApplication)]) {
@@ -457,7 +452,6 @@ NS_INLINE NSURLRequest * requestForKey(NSString * key) {
 }
 
 #pragma mark --- inline method ---
-
 NS_INLINE NSString * savePathWithKey(NSString * key) {
     NSString * cache = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
     NSString * path = [cache stringByAppendingPathComponent:@"DWFlashFlow"];
@@ -503,8 +497,8 @@ NS_INLINE NSString * MD5(NSString * str){
 };
 
 #pragma mark --- override ---
-+(instancetype)dw_new {
-    return [super new];
+-(instancetype)init {
+    return [self initWithMaxExpireInterval:(60 * 60 * 24 * 7) maxMemorySize:(1024 * 1024 * 2) maxDiskSize:(1024 * 1024 * 100)];
 }
 
 -(void)dealloc {

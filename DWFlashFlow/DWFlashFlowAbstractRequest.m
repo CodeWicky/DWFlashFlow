@@ -23,6 +23,7 @@
 @synthesize finished = _finished;
 @synthesize executing = _executing;
 
+#pragma mark --- private ---
 -(void)finishOperation {
     [self willChangeValueForKey:@"isFinished"];
     [self willChangeValueForKey:@"isExecuting"];
@@ -31,6 +32,20 @@
     [self didChangeValueForKey:@"isExecuting"];
     [self didChangeValueForKey:@"isFinished"];
     freeOperation(self);
+}
+
+-(void)configRequestWithStatus:(DWFlashFlowRequestStatus)status {
+    [self willChangeValueForKey:@"status"];
+    _status = status;
+    [self didChangeValueForKey:@"status"];
+}
+
+-(void)configRequestWithResponse:(id)response {
+    _response = response;
+}
+
+-(void)configRequestWithError:(NSError *)error {
+    _error = error;
 }
 
 #pragma mark --- override ---
@@ -89,7 +104,7 @@
 }
 
 -(void)dealloc {
-    NSLog(@"%@<%@> dealloc",NSStringFromClass([self class]) ,self.customID.length?self.customID:self.requestID);
+    NSLog(@"%@<%@> dealloc",NSStringFromClass([self class]) ,self.identifier.length?self.identifier:self.requestID);
 }
 
 #pragma mark --- tool func ---

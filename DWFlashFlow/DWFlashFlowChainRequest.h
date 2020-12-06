@@ -50,7 +50,7 @@
  
  @param completion 完成回调
  
- @disc 调用 -start 方法时会使用request对象的requestProgress和requestCompletion作为回调。-startWithCompletion: 系方法以实际传入参数为准。
+ @disc 调用 -start 方法时会使用request对象的requestProgress和requestCompletion作为回调。-startWithCompletion: 系方法会将非空的参数赋值给request对象，并作为回调。
  */
 -(void)startWithCompletion:(DWFlashFlowRequestCompletion)completion;
 -(void)start;
@@ -81,7 +81,7 @@
 @end
 
 typedef NSDictionary *(^DWFlashFlowChainParameter)(NSDictionary * responseInfo,DWFlashFlowRequest * r);
-typedef void (^DWFlashFlowReponseInfo)(__kindof id response,__kindof NSMutableDictionary * responseInfo);
+typedef void (^DWFlashFlowChainReponseInfo)(__kindof id response,__kindof NSMutableDictionary * responseInfo);
 @interface DWFlashFlowRequest (ChainParameter)
 
 //Fetch parameter from chainRequest.Before sending DWFlashFlowRequest,chainParameterHandler will be called in which you can get data from chainRequest.The return value of chainParameterHandler will be treated as parameter of DWFlashFlowRequest.
@@ -94,6 +94,6 @@ typedef void (^DWFlashFlowReponseInfo)(__kindof id response,__kindof NSMutableDi
 
 //Save response into chainRequest.ResponseInfoHandler will be called after the request in chainRequest finish.You can set the response or part of it into responseInfo.
 ///链请求参数保存。链请求中的任何请求完成时将回调此回调，可以将响应数据或其一部分赋值给responseInfo。
-@property (nonatomic ,copy) DWFlashFlowReponseInfo responseInfoHandler;
+@property (nonatomic ,copy) DWFlashFlowChainReponseInfo responseInfoHandler;
 
 @end

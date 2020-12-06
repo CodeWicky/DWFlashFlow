@@ -51,11 +51,6 @@
 ///自动清理过期文件并删除冗余文件至大小占最大限制的1/2。
 -(void)cleanLoalDiskCacheWithCompletion:(dispatch_block_t)completion;
 
-+(instancetype)new NS_UNAVAILABLE;
-
--(instancetype)init NS_UNAVAILABLE;
-
-
 /**
  初始化方法
 

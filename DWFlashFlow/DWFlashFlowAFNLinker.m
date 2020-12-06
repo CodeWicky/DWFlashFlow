@@ -7,7 +7,7 @@
 //
 
 #import "DWFlashFlowAFNLinker.h"
-#if __has_include("DWNetworkAFNManager.h")
+#if __has_include(<DWNetworkAFNManager/DWNetworkAFNManager.h>)
 #import <DWNetworkAFNManager/DWNetworkAFNManager.h>
 @interface DWFlashFlowRequest (Private)
 
@@ -26,7 +26,7 @@
 @implementation DWFlashFlowAFNLinker
 
 #pragma mark --- interface method ---
--(void)sendRequest:(DWFlashFlowRequest *)request progress:(DWFlashFlowProgressCallback)progress completion:(DWFlashFlowCompletion)completion {
+-(void)sendRequest:(DWFlashFlowRequest *)request progress:(DWFlahsFlowProgressCallback)progress completion:(DWFlashFlowLinkerCompletion)completion {
     DWNetworkAFNManager * manager = managerFromRequest(request);
     manager.requestSerializer = requestSerializerFromType(request.requestSerializerType);
     manager.requestSerializer.timeoutInterval = request.timeoutInterval;
@@ -40,26 +40,26 @@
         case DWFlashFlowRequestTypeUpload:
         {
             NSURLSessionUploadTask * t = [self uploadWithManager:manager urlString:urlString method:method parameters:parameters uploadFiles:request.files progress:progress completion:completion];
-            configRequestWithTask(request, t);
+            [self configRequest:request withTask:t];
         }
             break;
         case DWFlashFlowRequestTypeDownload:
         {
             DWFlashFlowDestinationCallback d = [self destinationFromRequest:request];
             NSURLSessionDownloadTask * t = [self downloadWithManager:manager urlString:urlString method:method parameters:parameters destination:d progress:progress completion:completion];
-            configRequestWithTask(request, t);
+            [self configRequest:request withTask:t];
         }
             break;
         default:
         {
             NSURLSessionDataTask * t = [self requestWithManager:manager urlString:urlString method:method parameters:parameters completion:completion];
-            configRequestWithTask(request, t);
+            [self configRequest:request withTask:t];
         }
             break;
     }
 }
 
--(void)sendResumeDataRequest:(DWFlashFlowRequest *)request progress:(DWFlashFlowProgressCallback)progress completion:(DWFlashFlowCompletion)completion {
+-(void)sendResumeDataRequest:(DWFlashFlowRequest *)request progress:(DWFlahsFlowProgressCallback)progress completion:(DWFlashFlowLinkerCompletion)completion {
     if (request.requestType != DWFlashFlowRequestTypeDownload) {
         return;
     }
@@ -72,20 +72,20 @@
     DWNetworkAFNManager * m = managerFromRequest(request);
     DWFlashFlowDestinationCallback d = [self destinationFromRequest:request];
     NSURLSessionDownloadTask * t = [self downloadWithManager:m resumeData:request.resumeData destination:d progress:progress completion:completion];
-    configRequestWithTask(request, t);
+    [self configRequest:request withTask:t];
 }
 
 -(void)resumeRequest:(DWFlashFlowRequest *)request {
     if (request.status == DWFlashFlowRequestSuspend) {
         [request.task resume];
-        configRequestWithStatus(request, DWFlashFlowRequestExcuting);
+        [self configRequest:request withStatus:DWFlashFlowRequestExcuting];
     }
 }
 
 -(void)suspendRequest:(DWFlashFlowRequest *)request {
     if (request.status == DWFlashFlowRequestExcuting) {
         [request.task suspend];
-        configRequestWithStatus(request, DWFlashFlowRequestSuspend);
+        [self configRequest:request withStatus:DWFlashFlowRequestSuspend];
     }
 }
 
@@ -95,7 +95,9 @@
             [request privateCancel];
         }
         [request.task cancel];
-        configRequestWithStatus(request, DWFlashFlowRequestCanceled);
+    }
+    if (request.status != DWFlashFlowRequestFinish) {
+        [self configRequest:request withStatus:DWFlashFlowRequestCanceled];
     }
 }
 
@@ -115,8 +117,8 @@
         } else {///否则生成resumeData
             NSURLSessionDownloadTask * task = request.task;
             [task cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
-                configRequestWithStatus(request, DWFlashFlowRequestCanceled);
-                configRequestWithResumeData(request, resumeData);
+                [self configRequest:request withStatus:DWFlashFlowRequestCanceled];
+                [self configRequest:request withResumeData:resumeData];
                 if (completion) {
                     completion(resumeData);
                 }
@@ -126,7 +128,7 @@
 }
 
 #pragma mark --- tool method ---
--(NSURLSessionDataTask *)requestWithManager:(DWNetworkAFNManager *)m urlString:(NSString *)urlString method:(NSString *)method parameters:(id)parameters completion:(DWFlashFlowCompletion)completion {
+-(NSURLSessionDataTask *)requestWithManager:(DWNetworkAFNManager *)m urlString:(NSString *)urlString method:(NSString *)method parameters:(id)parameters completion:(DWFlashFlowLinkerCompletion)completion {
     return [m request:urlString method:method parameters:parameters success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         if (completion) {
             completion(YES,responseObject,nil);
@@ -138,7 +140,7 @@
     }];
 }
 
--(NSURLSessionDownloadTask *)downloadWithManager:(DWNetworkAFNManager *)m urlString:(NSString *)urlString method:(NSString *)method parameters:(id)parameters destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination progress:(void (^)(NSProgress * downloadProgress))downloadProgressBlock completion:(DWFlashFlowCompletion)completion {
+-(NSURLSessionDownloadTask *)downloadWithManager:(DWNetworkAFNManager *)m urlString:(NSString *)urlString method:(NSString *)method parameters:(id)parameters destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination progress:(void (^)(NSProgress * downloadProgress))downloadProgressBlock completion:(DWFlashFlowLinkerCompletion)completion {
     return [m downLoad:urlString method:method parameters:parameters destination:destination progress:downloadProgressBlock success:^(NSURLSessionDownloadTask * _Nonnull task, NSURLResponse * _Nullable response, NSURL * _Nullable filePath) {
         if (completion) {
             completion(YES,filePath,nil);
@@ -150,7 +152,7 @@
     }];
 }
 
--(NSURLSessionDownloadTask *)downloadWithManager:(DWNetworkAFNManager *)m resumeData:(NSData *)resumeData destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination progress:(void (^)(NSProgress * downloadProgress))downloadProgressBlock completion:(DWFlashFlowCompletion)completion {
+-(NSURLSessionDownloadTask *)downloadWithManager:(DWNetworkAFNManager *)m resumeData:(NSData *)resumeData destination:(NSURL * (^)(NSURL *targetPath, NSURLResponse *response))destination progress:(void (^)(NSProgress * downloadProgress))downloadProgressBlock completion:(DWFlashFlowLinkerCompletion)completion {
     return [m downloadWithResumeData:resumeData destination:destination progress:downloadProgressBlock success:^(NSURLSessionDownloadTask * _Nonnull task, NSURLResponse * _Nullable response, NSURL * _Nullable filePath) {
         if (completion) {
             completion(YES,filePath,nil);
@@ -161,7 +163,7 @@
         }
     }];
 }
--(NSURLSessionUploadTask *)uploadWithManager:(DWNetworkAFNManager *)m urlString:(NSString *)urlString method:(NSString *)method parameters:(id)parameters uploadFiles:(NSArray<DWNetworkUploadFile *> *)files progress:(DWFlashFlowProgressCallback)uploadProgressBlock completion:(DWFlashFlowCompletion)completion {
+-(NSURLSessionUploadTask *)uploadWithManager:(DWNetworkAFNManager *)m urlString:(NSString *)urlString method:(NSString *)method parameters:(id)parameters uploadFiles:(NSArray<DWNetworkUploadFile *> *)files progress:(DWFlahsFlowProgressCallback)uploadProgressBlock completion:(DWFlashFlowLinkerCompletion)completion {
     return [m upload:urlString method:method uploadFiles:files parameters:parameters progress:uploadProgressBlock success:^(NSURLSessionDataTask * _Nonnull task, id  _Nonnull responseObject) {
         if (completion) {
             completion(YES,responseObject,nil);
@@ -174,7 +176,6 @@
 }
 
 #pragma mark --- tool func ---
-
 static inline __kindof AFHTTPRequestSerializer * requestSerializerFromType(DWFlashFlowRequestSerializerType type) {
     switch (type) {
         case DWFlashFlowRequestSerializerTypeJSON:
@@ -219,20 +220,6 @@ static inline void configRequestSerializer(__kindof AFHTTPRequestSerializer * se
     }
 }
 
-static inline void configRequestWithTask(DWFlashFlowRequest * request,__kindof NSURLSessionTask * task) {
-    [request setValue:task forKey:@"_task"];
-}
-
-static inline void configRequestWithStatus(DWFlashFlowAbstractRequest * r,DWFlashFlowRequestStatus status) {
-    [r willChangeValueForKey:@"status"];
-    [r setValue:@(status) forKey:@"_status"];
-    [r didChangeValueForKey:@"status"];
-}
-
-static inline void configRequestWithResumeData(DWFlashFlowRequest * r,NSData * resumeData) {
-    [r setValue:resumeData forKey:@"_resumeData"];
-}
-
 static inline DWNetworkAFNManager * managerFromRequest(DWFlashFlowRequest * r) {
     DWNetworkAFNManager * m = [DWNetworkAFNManager manager];
     m.userName = r.userName;
@@ -254,5 +241,5 @@ static inline DWNetworkAFNManager * managerFromRequest(DWFlashFlowRequest * r) {
 #pragma clang diagnostic pop
 
 @end
-
 #endif
+

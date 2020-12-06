@@ -12,6 +12,15 @@
     可以配置全局参数、统一开始、暂停、取消等操作。
     并且实际为请求消息的整合及转发者。
     接收到request对象后将转发给Linker对象。再由Linker对象负责对接请求框架
+ 
+    version 1.0.0
+    基本支持普通请求，请求链，批量请求功能
+    支持请求数据缓存
+    支持NSOperationQueue协同调用
+    支持底层请求核心定制
+ 
+    version 2.0.0
+    请求响应数据二次处理改为拦截器模式
  */
 
 #import <Foundation/Foundation.h>
@@ -29,7 +38,10 @@
 @end
 
 UIKIT_EXTERN const NSInteger CacheOnlyButNoCache;
+UIKIT_EXTERN const NSInteger RequestCanceled;
 UIKIT_EXTERN const NSInteger NeitherRegisterLinkerClassNorIncludeAFN;
+UIKIT_EXTERN const NSInteger BatchRequestFail;
+UIKIT_EXTERN const NSInteger ChainReuqestFail;
 
 @interface DWFlashFlowManager : NSObject
 
@@ -49,9 +61,9 @@ UIKIT_EXTERN const NSInteger NeitherRegisterLinkerClassNorIncludeAFN;
 ///全局预处理
 @property (nonatomic ,copy) DWFlashFlowProcessorBlock globalPreprocessor;
 
-//Global interceptor before completion.Customize the result as you want.
-///全局拦截器，在完成回调前定制你的返回结果
-@property (nonatomic ,copy) DWFlashFlowInterceptor globalInterceptor;
+//Global interceptor of all request.
+///全局拦截器
+@property (nonatomic ,copy) DWFlashFlowResponseInterceptor globalInterceptor;
 
 //Base URL for request.Use together with apiURL of request.
 ///根URL。与请求对象的apiURL配合使用。
@@ -77,14 +89,14 @@ UIKIT_EXTERN const NSInteger NeitherRegisterLinkerClassNorIncludeAFN;
 ///实例化方法
 +(instancetype)manager;
 
-//Register linker class for manager.Default is DWFlashFlowAFNLinker if project has include DWNetworkAFNManager,otherwise is nil.
-///为DWFlashFlowManager注册对应的Linker类。Linker负责链接实际请求类。如果工程中已经引用了DWNetworkAFNManager，那么默认为DWFlashFlowAFNLinker。否则默认为nil。
+//Regist the class of linker.DWFlashFlowAFNLinker by default, and DWFlashFlowAFNLinker will be available only when has include DWNetworkAFNManager.
+///注册Linker的实例类，若不注册，则默认使用DWFlashFlowAFNLinker。DWFlashFlowAFNLinker根据是否引入DWNetworkAFNManager自动决定有效性。
 +(BOOL)registerRequestLinkerClass:(Class)linkerClass;
 
 //Send a request.
 ///发送请求
 +(void)sendRequest:(__kindof DWFlashFlowAbstractRequest *)request completion:(DWFlashFlowRequestCompletion)completion;
-+(void)sendRequest:(__kindof DWFlashFlowAbstractRequest *)request progress:(DWFlashFlowProgressCallback)progress completion:(DWFlashFlowRequestCompletion)completion;
++(void)sendRequest:(__kindof DWFlashFlowAbstractRequest *)request progress:(DWFlahsFlowProgressCallback)progress completion:(DWFlashFlowRequestCompletion)completion;
 
 //Suspend a request.
 ///挂起请求

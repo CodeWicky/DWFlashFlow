@@ -15,15 +15,15 @@
 #import "DWFlashFlowRequest.h"
 
 ///完成回调
-typedef void(^DWFlashFlowCompletion)(BOOL success,id response,NSError * error);
+typedef void(^DWFlashFlowLinkerCompletion)(BOOL success,id response,NSError * error);
 @protocol DWFlashFlowRequestProtocol
 
 ///Request protocol for linker.
 @required
 
--(void)sendRequest:(DWFlashFlowRequest *)request progress:(DWFlashFlowProgressCallback)progress completion:(DWFlashFlowCompletion)completion;
+-(void)sendRequest:(DWFlashFlowRequest *)request progress:(DWFlahsFlowProgressCallback)progress completion:(DWFlashFlowLinkerCompletion)completion;
 
--(void)sendResumeDataRequest:(DWFlashFlowRequest *)request progress:(DWFlashFlowProgressCallback)progress completion:(DWFlashFlowCompletion)completion;
+-(void)sendResumeDataRequest:(DWFlashFlowRequest *)request progress:(DWFlahsFlowProgressCallback)progress completion:(DWFlashFlowLinkerCompletion)completion;
 
 -(void)resumeRequest:(DWFlashFlowRequest *)request;
 
@@ -62,7 +62,19 @@ typedef void(^DWFlashFlowCompletion)(BOOL success,id response,NSError * error);
 -(DWFlashFlowProcessorBlock)preprocessorFromRequest:(DWFlashFlowRequest *)r;
 
 //Get actual request interceptor from request.
-///获取请求实际拦截器。
--(DWFlashFlowInterceptor)interceptorFromRequest:(DWFlashFlowRequest *)r;
+///获取请求拦截器。
+-(DWFlashFlowResponseInterceptor)interceptorFromRequest:(DWFlashFlowRequest *)r;
+
+//Private method to config request status.
+///私有方法，可配置request当前的状态。
+-(void)configRequest:(DWFlashFlowRequest *)r withStatus:(DWFlashFlowRequestStatus)status;
+
+//Private method to config request resumeData.
+///私有方法，可配置request当前的resumeData。
+-(void)configRequest:(DWFlashFlowRequest *)r withResumeData:(NSData *)resumeData;
+
+//Private method to config request task.
+///私有方法，可配置request当前的task。
+-(void)configRequest:(DWFlashFlowRequest *)r withTask:(NSURLSessionTask *)task;
 
 @end

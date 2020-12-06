@@ -8,6 +8,7 @@
 
 #import "DWFlashFlowChainRequest.h"
 #import "DWFlashFlowManager.h"
+#import "DWFlashFlowAbstractRequest+Private.h"
 #import <objc/runtime.h>
 
 @implementation DWFlashFlowChainRequest
@@ -21,8 +22,10 @@
 }
 
 -(void)startWithCompletion:(DWFlashFlowRequestCompletion)completion {
+    if (completion) {
+        self.requestCompletion = completion;
+    }
     [super start];
-    [DWFlashFlowManager sendRequest:self completion:completion];
 }
 
 -(void)cancelByProducingResumeData:(void (^)(NSData *))completionHandler {
@@ -38,9 +41,9 @@
     [DWFlashFlowManager resumeRequest:self];
 }
 
-#pragma mark --- tool func ---
-static inline void configRequestWithResponse(DWFlashFlowAbstractRequest * r,id response) {
-    [r setValue:response forKey:@"_response"];
+#pragma mark --- private ---
+-(void)configRequestWithCurrentRequest:(DWFlashFlowAbstractRequest *)currentRequest {
+    _currentRequest = currentRequest;
 }
 
 #pragma mark --- override ---
@@ -76,7 +79,7 @@ static inline void configRequestWithResponse(DWFlashFlowAbstractRequest * r,id r
     NSMutableDictionary *r = [super response];
     if (!r) {
         r = @{}.mutableCopy;
-        configRequestWithResponse(self, r);
+        [self configRequestWithResponse:r];
     }
     return r;
 }
@@ -105,11 +108,11 @@ static inline void configRequestWithResponse(DWFlashFlowAbstractRequest * r,id r
 
 @implementation DWFlashFlowAbstractRequest (ChainParameter)
 
--(DWFlashFlowReponseInfo)responseInfoHandler {
+-(DWFlashFlowChainReponseInfo)responseInfoHandler {
     return objc_getAssociatedObject(self, _cmd);
 }
 
--(void)setResponseInfoHandler:(DWFlashFlowReponseInfo)responseInfoHandler {
+-(void)setResponseInfoHandler:(DWFlashFlowChainReponseInfo)responseInfoHandler {
     objc_setAssociatedObject(self, @selector(responseInfoHandler), responseInfoHandler, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
 
